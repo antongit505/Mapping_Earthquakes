@@ -20,7 +20,7 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 
 //Create a base layer that hold both maps
 let baseMaps = {
-    Street: light,
+    Light: light,
     Dark: dark
 };
 
@@ -35,14 +35,27 @@ let map = L.map('mapid', {
 L.control.layers(baseMaps).addTo(map)
 
 // Accesing the GeoJSON data URL
-let torontoData = "https://raw.githubusercontent.com/antongit505/Mapping_Earthquakes/Mapping_GeoJSON_points/Mapping_GeoJSON_points/majorAirports.json";
+let torontoData = "https://raw.githubusercontent.com/antongit505/Mapping_Earthquakes/Mapping_GeoJSON_linestrings/Mapping_GeoJSON_linestrings/torontoRoutes.json";
+
+
+// Create a style for the lines.
+let myStyle = {
+    color: "#ffffa1",
+    weight: 2
+}
 
 //Grabbing our GeoJSON data
-d3.json(airportData).then( function(data) {
+d3.json(torontoData).then( function(data) {
     console.log(data);
     //Creating a GeoJSON layer with the retrieved data
-    L.geoJSON(data)
-    //.bindPopup("<h1> Airport code: "+ +"<hr> <h2>Airport Name: "+ +"</h2>")
+    L.geoJSON(data, {
+        style: myStyle,
+        onEachFeature: function(feature,layer){
+            console.log(feature)
+            layer.bindPopup( '<h3>Airline:'+ feature.properties.airline +'</h3> <hr> <h3> Destination: ' +
+                                 feature.properties.dst + '</h3>' )
+        }
+    })
     .addTo(map);
 })
 //To add popups to geoJSON https://leafletjs.com/reference.html#geojson
