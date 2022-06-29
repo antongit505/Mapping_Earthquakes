@@ -31,9 +31,10 @@ Finally an HTML and CSS files were created to give format and display the maps c
 
 ![](Earthquake_challenge/static/images/map2.jpg)
 
-![](Earthquake_challenge/static/images/option2.jpg)
+![](Earthquake_challenge/static/images/options2.jpg)
 
 * A color scale is displayed to shown the intensity of the earthquake.
+
 ![](Earthquake_challenge/static/images/scale.jpg)
 
 
